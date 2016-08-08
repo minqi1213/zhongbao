@@ -1,0 +1,35 @@
+CREATE TABLE `user` (
+  `uid` mediumint(8) unsigned NOT NULL auto_increment,
+  `username` char(15) NOT NULL default '',
+  `password` char(32) NOT NULL default '',
+  `email` varchar(40) NOT NULL default '',
+  `regdate` int(10) unsigned NOT NULL default '0',
+  PRIMARY KEY  (`uid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+
+CREATE TABLE `bug` (
+  `bid` mediumint(8) unsigned NOT NULL auto_increment,
+  `uid` mediumint(8) unsigned NOT NULL,
+  `pid` mediumint(8) unsigned NOT NULL,
+  `imageid` mediumint(8) unsigned NOT NULL,
+  `btitle` TINYBLOB NOT NULL default '',
+  `bdescription` BLOB NOT NULL default '',
+  `btime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  PRIMARY KEY  (`bid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `project` (
+  `pid` mediumint(8) unsigned NOT NULL auto_increment,
+  `pname` TINYBLOB NOT NULL default '',
+  `ptime` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  PRIMARY KEY  (`pid`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
+
+CREATE TABLE `photo` (  
+  `imageid` int(10) unsigned NOT NULL auto_increment,
+  `bid` mediumint(8) unsigned NOT NULL,
+  `type` varchar(100) NOT NULL,  
+  `binarydata` mediumblob NOT NULL,  
+  PRIMARY KEY  (`imageid`)  
+) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
