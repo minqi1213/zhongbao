@@ -5,10 +5,8 @@ echo $bh;
 //包含数据库连接文件
 include('conn.php');
 
-$user_query = mysql_query("select btitle,bdescription from bug where bid=$bh limit 1");
+$user_query = mysql_query("select btitle,bdescription,binarydata from bug where bid=$bh limit 1");
 $row = mysql_fetch_array($user_query);
-
-
 
 ?>
 <head>
@@ -75,6 +73,12 @@ if(!isset($_SESSION['userid'])){
 ?>
 </textarea>
 <p/>
+<p>
+<label for="bugimage" class="label">bug截图:</label>
+<?php
+	echo "<img id=\"bugimage\" name=\"bugimage\" src=\"$row[binarydata]\">";
+?>
+</p>
 </form>
 </fieldset>
 </div>
