@@ -19,6 +19,7 @@ if(!isset($_POST['submit'])){
 }
 $username = htmlspecialchars($_POST['username']);
 $password = MD5($_POST['password']);
+$role = $_POST['role'];
 
 //包含数据库连接文件
 //include('conn.php');
@@ -32,12 +33,23 @@ mysql_query("set character set 'gbk'");
 //写库
 mysql_query("set names 'gbk'");
 //检测用户名及密码是否正确
-$check_query = mysql_query("select uid from user where username='$username' and password='$password' limit 1");
+if ($role == 'engineer'){
+	$check_query = mysql_query("select uid from user where username='$username' and password='$password' limit 1");
+} else if ($role == 'cp'){
+	$check_query = mysql_query("select cpid from cp where cpname='$username' and password='$password' limit 1");
+}
+
 if($result = mysql_fetch_array($check_query)){
 	//登录成功
 	$_SESSION['username'] = $username;
-	$_SESSION['userid'] = $result['uid'];
-	echo $username,' 欢迎你！进入 <a href="home.php">首页</a><br />';
+	$_SESSION['role'] = $role;
+	if($role == 'engineer'){
+		$_SESSION['userid'] = $result['uid'];
+		echo $username.' 工程师，欢迎您！进入 <a href="home.php">首页</a><br />';
+	} else if ($role == 'cp'){
+		$_SESSION['userid'] = $result['cpid'];
+		echo $username.' 开发商，欢迎您！进入 <a href="home.php">首页</a><br />';
+	}
 	echo '点击此处 <a href="login.php?action=logout">注销</a> 登录！<br />';
 	var_dump($_SESSION);
 	exit;
