@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>任务提交</title>
+  <style type="text/css">
+    html{font-size:12px;}
+	fieldset{width:640px; margin: 0 auto;}
+	legend{font-weight:bold; font-size:14px;}
+	label{float:left; width:70px; margin-left:10px;}
+	.left{margin-left:80px;}
+	.input{width:500px;resize:none}
+	#missiondesc{height:300px;}
+	span{color: #666666;}
+  </style>
+<script language=JavaScript>
+<!--
+
+function InputCheck(RegForm)
+{
+  if (RegForm.bugtitle.value == "")
+  {
+    alert("任务标题不可为空!");
+    RegForm.bugtitle.focus();
+    return (false);
+  }
+  if (RegForm.bugdesc.value == "")
+  {
+    alert("任务描述不可为空!");
+    RegForm.bugdesc.focus();
+    return (false);
+  }
+}
+
+//-->
+</script>
+</head>
+<div>
+<fieldset>
+<legend>任务提交</legend>
+<form name="RegForm" method="post" action="submit_mission.php" enctype="multipart/form-data" onSubmit="return InputCheck(this)">
+<p>
+<label for="missiontitle" class="label">任务标题:</label>
+<textarea id="missiontitle" name="missiontitle" type="text" class="input" rows="1"></textarea>
+<p/>
+<p>
+<label for="missiondesc" class="label">任务描述:</label>
+<textarea id="missiondesc" name="missiondesc" type="text" class="input" >
+</textarea>
+<p/>
+<p>
+<input type="submit" name="submit" value="  提交任务  " class="left" />
+</p>
+</form>
+</fieldset>
+</div>
+<body>
+</body>
+</html>

@@ -10,7 +10,11 @@ if(!isset($_SESSION['userid'])){
 if(!isset($_SESSION['userid'])){
 	require('header.php');
 } else {
-	require('header_login.php');
+	if($_SESSION['role']=='cp'){
+		require('header_cp.php');
+	}else if ($_SESSION['role']=='engineer'){
+		require('header_login.php');
+	}
 }
 
 //包含数据库连接文件
