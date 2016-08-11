@@ -29,6 +29,7 @@ echo '用户名：',$username,'<br />';
 echo '邮箱：',$row['email'],'<br />';
 echo '注册日期：',date("Y-m-d", $row['regdate']),'<br />';
 echo '<a href="login.php?action=logout">注销</a><br />';
+require('missions_cp.php');
 ?>
 <?php
   require('footer.php');
