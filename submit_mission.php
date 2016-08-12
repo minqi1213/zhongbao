@@ -15,8 +15,8 @@ define('ROOT',dirname(__FILE__).'/');
 
 $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
-$mtitle = $_POST['missiontitle'];
-$mdescription = $_POST['missiondesc'];
+$mtitle = mysql_escape_string($_POST['missiontitle']);
+$mdescription = mysql_escape_string($_POST['missiondesc']);
 
 //var_dump($btitle);
 //var_dump($bdescription);

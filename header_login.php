@@ -33,7 +33,7 @@
   <tr >
     <td class="label_header" width="25%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu"><a href="submit.html">提交</a></span></td>
+      <span class="menu"><a href="submit_bug.php">提交</a></span></td>
     <td class="label_header" width="25%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
       <span class="menu"><a href="results2.php">查询</a></span></td>
