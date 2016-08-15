@@ -76,7 +76,7 @@ if(!isset($_SESSION['userid'])){
 <p>
 <label for="bugimage" class="label">bug截图:</label>
 <?php
-	echo "<img id=\"bugimage\" name=\"bugimage\" src=\"$row[binarydata]\">";
+	echo "<img id=\"bugimage\" name=\"bugimage\" width=\"100%\" src=\"$row[binarydata]\">";
 ?>
 </p>
 </form>

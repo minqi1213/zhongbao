@@ -6,7 +6,7 @@ $userid = $_SESSION['userid'];
 
 include('conn.php');
 
-$result = mysql_query("select bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where userproject.pid=bug.pid and userproject.uid='$userid' and bug.uid=user.uid"); //执行SQL查询指令
+$result = mysql_query("select bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where userproject.pid=bug.pid and userproject.uid='$userid' and bug.uid=user.uid order by bug.btime asc"); //执行SQL查询指令
 echo "<table border=1, width=100%><tr>";
 echo "<td width=40%>&nbsp;"."标题"."&nbsp;</td>";
 echo "<td width=10%>&nbsp;"."详情"."&nbsp;</td>";
