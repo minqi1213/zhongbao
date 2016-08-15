@@ -15,6 +15,7 @@ define('ROOT',dirname(__FILE__).'/');
 
 $userid = $_SESSION['userid'];
 $username = $_SESSION['username'];
+$bproject = $_POST['userproject'];
 $btitle = $_POST['bugtitle'];
 $bdescription = $_POST['bugdesc'];
 $image = mysql_escape_string(file_get_contents($_FILES['photo']['tmp_name']));  
@@ -47,7 +48,7 @@ include('conn.php');
 
 //写入数据
 //$password = MD5($password);
-$sql = "INSERT INTO bug(uid,pid,btitle,bdescription,type,binarydata)VALUES('$userid',1,'$btitle','$bdescription','$type','$str_file')";
+$sql = "INSERT INTO bug(uid,pid,btitle,bdescription,type,binarydata)VALUES('$userid','$bproject','$btitle','$bdescription','$type','$str_file')";
 if(mysql_query($sql,$conn)){
 	if(!file_exists($upload_dir)){
 		mkdir($upload_dir); //创建目录 成功则返回true 失败则返回flase

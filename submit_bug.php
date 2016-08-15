@@ -43,11 +43,14 @@ function InputCheck(RegForm)
 session_start();
 include('conn.php');
 $uid = $_SESSION['userid']; 
-$result = mysql_query("select project.pid project.pname from project,userproject where userproject.uid='$uid' and userproject.status=1 and userproject.pid=project.pid"); //执行SQL查询指令
+$result = mysql_query("select project.pid,project.pname from project,userproject where userproject.uid='$uid' and userproject.status=1 and userproject.pid=project.pid"); //执行SQL查询指令
 var_dump($result);
 echo "<p>";
 echo "<label for=\"userproject\" class=\"label\">请选择项目:</label>";
 echo "<select id=\"userproject\" name=\"userproject\">";
+while($rows = mysql_fetch_row($result)){//使用while遍历所有记录，并显示在select
+		echo "<option value=\"$rows[0]\">$rows[1]</option>";
+}
 echo "</select>";
 echo "</p>";
 ?>
