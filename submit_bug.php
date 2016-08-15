@@ -61,8 +61,6 @@ echo "</p>";
 <p>
 <label for="bugdesc" class="label">bug描述:</label>
 <textarea id="bugdesc" name="bugdesc" type="text" class="input" >
-Title:
-
 前提条件：
 
 复现步骤：
