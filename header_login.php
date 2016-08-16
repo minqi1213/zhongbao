@@ -12,7 +12,9 @@
        font-family:arial,sans-serif}
     p.foot {color:white; font-size:9pt; text-align:center;
             font-family:arial,sans-serif; font-weight:bold}
-    a:link,a:visited,a:active {color:white}
+    a.menu_a:link,a.menu_a:visited,a.menu_a:active {color:white}
+    fieldset{width:90%; margin: 0 auto;}
+    legend{font-weight:bold; font-size:14px;}
   </style>
 </head>
 <body>
@@ -33,16 +35,16 @@
   <tr >
     <td class="label_header" width="25%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu"><a href="submit_bug.php">提交</a></span></td>
+      <span class="menu"><a class="menu_a" href="submit_bug.php">提交</a></span></td>
     <td class="label_header" width="25%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu"><a href="results2.php">查询</a></span></td>
+      <span class="menu"><a class="menu_a" href="buglist_engineer.php">查询</a></span></td>
     <td class="label_header" width="25%" >
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu" ><a href="my.php">任务接取中心</a></span></td>
+      <span class="menu" ><a class="menu_a" href="my.php">任务接取中心</a></span></td>
     <td class="label_header" width="25%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu"><a href="login.php?action=logout">注销</a></span></td>
+      <span class="menu"><a class="menu_a" href="login.php?action=logout">注销</a></span></td>
   </tr>
   </table>
 
