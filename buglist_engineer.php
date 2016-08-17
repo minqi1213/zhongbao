@@ -41,9 +41,20 @@ $action = isset($_REQUEST['action'])? $_REQUEST['action'] : '';
 if ($action == 'bug_search'){
 	$projectid = $_POST['bugfilter_project'];
 	$isuser = $_POST['bugfilter_user'];
+	$keyword = trim($_POST['bugfilter_keyword']);
+	$query_keyword = "";
+	if($keyword == ""){
+		$query_keyword = "";
+	} else {
+		$arr = preg_split('/[\n\r\t\s]+/i', $keyword);
+		for ($i=0;$i<count($arr);$i++){
+			$query_keyword = $query_keyword."bug.btitle like '%$arr[$i]%' and ";
+		}
+	}
 	$query_user= ($isuser==1)? " and bug.uid="."$userid" : '';
 	$query_project = ($projectid==0)? '' : " and bug.pid="."$projectid";
-	$result = mysql_query("select bug.bid,bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where userproject.pid=bug.pid and userproject.uid='$userid'".$query_user."$query_project"." and bug.uid=user.uid order by bug.btime asc"); //执行SQL查询指令
+//	$result = mysql_query("select bug.bid,bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where userproject.pid=bug.pid and userproject.uid='$userid'".$query_user."$query_project"." and bug.uid=user.uid order by bug.btime asc"); //执行SQL查询指令
+	$result = mysql_query("select bug.bid,bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where ".$query_keyword."userproject.pid=bug.pid and userproject.uid='$userid'".$query_user."$query_project"." and bug.uid=user.uid order by bug.btime asc"); //执行SQL查询指令
 } else {
 //展现buglist
 	$result = mysql_query("select bug.bid,bug.btitle,bug.bid, bug.btime,user.username from bug, userproject,user where userproject.pid=bug.pid and userproject.uid='$userid' and bug.uid=user.uid order by bug.btime asc"); //执行SQL查询指令
