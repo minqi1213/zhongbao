@@ -48,7 +48,7 @@ if ($action == 'bug_search'){
 	} else {
 		$arr = preg_split('/[\n\r\t\s]+/i', $keyword);
 		for ($i=0;$i<count($arr);$i++){
-			$query_keyword = $query_keyword."bug.btitle like '%$arr[$i]%' and ";
+			$query_keyword = $query_keyword."(bug.btitle like '%$arr[$i]%' or bug.bdescription like '%$arr[$i]%') and ";
 		}
 	}
 	$query_user= ($isuser==1)? " and bug.uid="."$userid" : '';
