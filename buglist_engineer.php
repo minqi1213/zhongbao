@@ -21,13 +21,13 @@ echo "<p><label for=\"bugfilter_project\" class=\"label\">&nbsp;&nbsp;&nbsp;&nbs
 echo "<select id=\"bugfilter_project\" name=\"bugfilter_project\">";
 echo "<option value=0>所有项目</option>";
 while($project_rows = mysql_fetch_row($project_result)){//使用while遍历所有记录，并显示在select
-	echo "<option value=\"$project_rows[0]\">$project_rows[1]</option>";
+	echo "<option value=\"$project_rows[0]\"".($_POST['bugfilter_project']==$project_rows[0]?"selected=selected":"").">$project_rows[1]</option>";
 }
 echo "</select>";
 echo "</label><label for=\"bugfilter_user\" class=\"label\">&nbsp;&nbsp;&nbsp;&nbsp;请选择提交人:&nbsp;&nbsp;";
 echo "<select id=\"bugfilter_user\" name=\"bugfilter_user\">";
-echo "<option value=0>所有人</option>";
-echo "<option value=1>我</option>";
+echo "<option value=0 ".($_POST['bugfilter_user']==0?"selected=selected":"").">所有人</option>";
+echo "<option value=1 ".($_POST['bugfilter_user']==1?"selected=selected":"").">我</option>";
 echo "</select>";
 echo "</label><label style=\"display:inline-block;width:50%;\" for=\"bugfilter_keyword\" class=\"label\" align=\"right\">&nbsp;&nbsp;&nbsp;&nbsp;";
 echo "<input style=\"width:90%;\" id=\"bugfilter_keyword\" name=\"bugfilter_keyword\" type=\"text\" class=\"input\" placeholder=\"请输入要搜索的关键字，以空格隔开\"/>";
