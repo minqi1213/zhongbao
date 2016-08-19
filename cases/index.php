@@ -38,15 +38,16 @@
 			$('#fm').form('clear');
 			url = 'save_user.php';
 		}
-		function editUser(){
+		function editCase(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
 				$('#dlg').dialog('open').dialog('setTitle','执行用例');
 				$('#fm').form('load',row);
-				url = 'update_user.php?id='+row.id;
+				$('#cstatus').val(row.cstatus);
+				url = 'update_casestatus.php?cid='+row.cid;
 			}
 		}
-		function saveUser(){
+		function saveStatus(){
 			$('#fm').form('submit',{
 				url: url,
 				onSubmit: function(){
@@ -85,6 +86,9 @@
 				});
 			}
 		}
+		function rowformatter(value,row,index){
+			return "<a href='../detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+		}
 	</script>
 </head>
 <body>
@@ -105,12 +109,12 @@
 				<th field="cexpect" width="20%">期待结果</th>
 				<th field="ctype" width="10%">测试类型</th>
 				<th field="cresult" width="10%">测试结果</th>
-				<th field="cbug" width="10%">bug</th>
+				<th data-options="field:'cbug',formatter:rowformatter" width="10%" >bug</th>
 			</tr>
 		</thead>
 	</table>
 	<div id="toolbar">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">执行用例</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCase()">执行用例</a>
 	</div>
 	
 	<div id="dlg" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
@@ -118,25 +122,29 @@
 		<div class="ftitle">用例状态</div>
 		<form id="fm" method="post" novalidate>
 			<div class="fitem">
-				<label>姓:</label>
-				<input name="firstname" class="easyui-validatebox" required="true">
+				<label>用例:</label>
+				<textarea name="ccase" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
 			</div>
 			<div class="fitem">
-				<label>名:</label>
-				<input name="lastname" class="easyui-validatebox" required="true">
+				<label>期望结果:</label>
+				<textarea name="cexpect" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
 			</div>
 			<div class="fitem">
-				<label>电话:</label>
-				<input name="phone">
+				<label>实际结果:</label>
+				<select id="cresult" name="cresult">
+					<option value='未执行'>未执行</option>
+					<option value='通过'>通过</option>
+					<option value='失败'>失败</option>
+				</select>
 			</div>
 			<div class="fitem">
-				<label>电子邮件:</label>
-				<input name="email" class="easyui-validatebox" validType="email">
+				<label>bug:</label>
+				<input name="cbug" class="easyui-validatebox">
 			</div>
 		</form>
 	</div>
 	<div id="dlg-buttons">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveUser()">保存</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveStatus()">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg').dialog('close')">取消</a>
 	</div>
 </body>
