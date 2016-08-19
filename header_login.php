@@ -41,7 +41,7 @@
       <span class="menu"><a class="menu_a" href="buglist_engineer.php">查询</a></span></td>
     <td class="label_header" width="20%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu"><a class="menu_a" href="case_engineer.php">测试用例</a></span></td>
+      <span class="menu"><a class="menu_a" href="./cases/index.php">测试用例</a></span></td>
     <td class="label_header" width="20%" >
       <img src="s-logo.gif" alt="" height="20" width="20" />
       <span class="menu" ><a class="menu_a" href="my.php">任务接取中心</a></span></td>

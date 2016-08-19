@@ -94,18 +94,18 @@
 		<div>Click the buttons on datagrid toolbar to do crud actions.</div>
 	</div>
 	
-	<table id="dg" title="我的用例" class="easyui-datagrid" style="width:700px;height:250px"
+	<table id="dg" title="我的用例" class="easyui-datagrid" style="width:80%;height:400px"
 			url="get_cases.php"
 			toolbar="#toolbar" pagination="true"
 			rownumbers="true" fitColumns="true" singleSelect="true">
 		<thead>
 			<tr>
-				<th field="cmodel" width="50">模块</th>
-				<th field="ccase" width="50">测试用例</th>
-				<th field="cexpect" width="50">期待结果</th>
-				<th field="ctype" width="50">测试类型</th>
-				<th field="cresult" width="50">测试结果</th>
-				<th field="cbug" width="50">bug</th>
+				<th field="cmodel" width="10%">模块</th>
+				<th field="ccase" width="40%">测试用例</th>
+				<th field="cexpect" width="20%">期待结果</th>
+				<th field="ctype" width="10%">测试类型</th>
+				<th field="cresult" width="10%">测试结果</th>
+				<th field="cbug" width="10%">bug</th>
 			</tr>
 		</thead>
 	</table>
@@ -113,7 +113,7 @@
 		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editUser()">执行用例</a>
 	</div>
 	
-	<div id="dlg" class="easyui-dialog" style="width:400px;height:280px;padding:10px 20px"
+	<div id="dlg" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
 			closed="true" buttons="#dlg-buttons">
 		<div class="ftitle">用例状态</div>
 		<form id="fm" method="post" novalidate>
