@@ -9,7 +9,7 @@
 	$rs = mysql_query("select count(*) from case_mmorpg");
 	$row = mysql_fetch_row($rs);
 	$result["total"] = $row[0];
-	$rs = mysql_query("select cid,cmodel,ccase,cexpect,ctype,cresult,cbug from case_mmorpg limit $offset,$rows");
+	$rs = mysql_query("select case_mmorpg.cid,cmodel,ccase,cexpect,ctype,cresult,cbug from case_mmorpg limit $offset,$rows");
 	
 	$items = array();
 	while($row = mysql_fetch_object($rs)){

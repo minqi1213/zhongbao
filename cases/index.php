@@ -89,6 +89,15 @@
 		function rowformatter(value,row,index){
 			return "<a href='../detail.php?id="+value+"' target='_blank' >"+value+"</a>";
 		}
+		function formatResult(val,row){
+			if (val == '失败'){
+				return '<span style="color:red;">'+val+'</span>';
+			} else if ( val == '通过'){
+				return '<span style="color:green;">'+val+'</span>';
+			} else {
+				return val;
+			}
+		}
 	</script>
 </head>
 <body>
@@ -108,13 +117,29 @@
 				<th field="ccase" width="40%">测试用例</th>
 				<th field="cexpect" width="20%">期待结果</th>
 				<th field="ctype" width="10%">测试类型</th>
-				<th field="cresult" width="10%">测试结果</th>
+				<th data-options="field:'cresult',formatter:formatResult" width="10%">测试结果</th>
 				<th data-options="field:'cbug',formatter:rowformatter" width="10%" >bug</th>
 			</tr>
 		</thead>
 	</table>
-	<div id="toolbar">
+	<div id="toolbar" style="padding:5px;height:auto">
+		<div>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editCase()">执行用例</a>
+		</div>
+		<div>
+			项目: 
+			<select class="easyui-combobox" panelHeight="auto" style="width:100px">
+				<option value="java">Java</option>
+				<option value="c">C</option>
+				<option value="basic">Basic</option>
+				<option value="perl">Perl</option>
+				<option value="python">Python</option>
+<?php>
+	echo "<option value=\"php\">php</option>";
+<?>
+			</select>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search">选择</a>
+		</div>
 	</div>
 	
 	<div id="dlg" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
