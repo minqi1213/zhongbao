@@ -98,6 +98,14 @@
 				return val;
 			}
 		}
+		function loadDataGridWithParam(){
+			$('#dg').datagrid({
+				queryParams:{
+					pname:$('#projectselect').val()
+				}
+			});
+			
+		}
 	</script>
 </head>
 <body>
@@ -128,17 +136,18 @@
 		</div>
 		<div>
 			项目: 
-			<select class="easyui-combobox" panelHeight="auto" style="width:100px">
-				<option value="java">Java</option>
-				<option value="c">C</option>
-				<option value="basic">Basic</option>
-				<option value="perl">Perl</option>
-				<option value="python">Python</option>
-<?php>
-	echo "<option value=\"php\">php</option>";
-<?>
+			<select id="projectselect" class="easyui-combobox" panelHeight="auto" style="width:100px">
+<?php
+	session_start();
+	$uid = $_SESSION['userid'];
+	include('conn.php');
+	$result = mysql_query("select project.pid,project.pname from project,userproject where userproject.uid='$uid' and userproject.status=1 and userproject.pid=project.pid"); //执行SQL查询指令
+	while($rows = mysql_fetch_row($result)){//使用while遍历所有记录，并显示在select
+		echo "<option value=\"case_$rows[1]\">$rows[1]</option>";
+	}
+?>
 			</select>
-			<a href="#" class="easyui-linkbutton" iconCls="icon-search">选择</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="loadDataGridWithParam()">选择</a>
 		</div>
 	</div>
 	

@@ -1,15 +1,24 @@
 <?php
+	session_start();
+	//检测是否登录，若没登录则转向登录界面
+	if(!isset($_SESSION['userid'])){
+		header("Location:login.html");
+		exit();
+	}
+	$uid=$_SESSION['userid'];
+
 	$page = isset($_POST['page']) ? intval($_POST['page']) : 1;
 	$rows = isset($_POST['rows']) ? intval($_POST['rows']) : 10;
 	$offset = ($page-1)*$rows;
 	$result = array();
 
+	$pname = isset($_POST['pname']) ? strtolower($_POST['pname']):"";
 	include 'conn.php';
-	
-	$rs = mysql_query("select count(*) from case_mmorpg");
+	//$rs = mysql_query("select count(*) from case_mmorpg");
+	$rs = mysql_query("select count(*) from $pname");
 	$row = mysql_fetch_row($rs);
 	$result["total"] = $row[0];
-	$rs = mysql_query("select case_mmorpg.cid,cmodel,ccase,cexpect,ctype,cresult,cbug from case_mmorpg limit $offset,$rows");
+	$rs = mysql_query("select case_mmorpg.cid,cmodel,ccase,cexpect,ctype,cresult,cbug from $pname limit $offset,$rows");
 	
 	$items = array();
 	while($row = mysql_fetch_object($rs)){
