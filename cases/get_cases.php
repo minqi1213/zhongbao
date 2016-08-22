@@ -20,7 +20,7 @@
 	$row = mysql_fetch_row($rs);
 	$result["total"] = $row[0];
 	//$rs = mysql_query("select case_mmorpg.cid,cmodel,ccase,cexpect,ctype,cresult,cbug from $pname limit $offset,$rows");
-	$rs= mysql_query("select usercase.cid,usercase.cmodel,$pname.ccase, $pname.cexpect, $pname.ctype, usercase.cresult,usercase.cbug from usercase left join $pname on usercase.cid=$pname.cid where usercase.uid=$uid limit $offset,$rows");
+	$rs= mysql_query("select usercase.cid,usercase.pid,usercase.cmodel,$pname.ccase, $pname.cexpect, $pname.ctype, usercase.cresult,usercase.cbug from usercase left join $pname on usercase.cid=$pname.cid where usercase.uid=$uid limit $offset,$rows");
 	$items = array();
 	while($row = mysql_fetch_object($rs)){
 		array_push($items, $row);

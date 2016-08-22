@@ -13,6 +13,7 @@ $cresult = $_REQUEST['cresult'];
 $cbug = $_REQUEST['cbug'];
 $pid = intval($_REQUEST['pid']);
 
+
 include 'conn.php';
 
 //$sql = "update users set firstname='$firstname',lastname='$lastname',phone='$phone',email='$email' where id=$id";

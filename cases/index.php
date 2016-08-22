@@ -44,8 +44,7 @@
 				$('#dlg').dialog('open').dialog('setTitle','执行用例');
 				$('#fm').form('load',row);
 				$('#cstatus').val(row.cstatus);
-				pid = $('#projectselect').val();
-				url = 'update_casestatus.php?cid='+row.cid+'&pid='+pid;
+				url = 'update_casestatus.php?cid='+row.cid+'&pid='+row.pid;
 			}
 		}
 		function saveStatus(){
