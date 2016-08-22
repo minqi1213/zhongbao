@@ -44,7 +44,8 @@
 				$('#dlg').dialog('open').dialog('setTitle','执行用例');
 				$('#fm').form('load',row);
 				$('#cstatus').val(row.cstatus);
-				url = 'update_casestatus.php?cid='+row.cid;
+				pid = $('#projectselect').val();
+				url = 'update_casestatus.php?cid='+row.cid+'&pid='+pid;
 			}
 		}
 		function saveStatus(){
@@ -101,7 +102,7 @@
 		function loadDataGridWithParam(){
 			$('#dg').datagrid({
 				queryParams:{
-					pname:$('#projectselect').val()
+					pname:$('#projectselect').text()
 				}
 			});
 			
@@ -143,7 +144,7 @@
 	include('conn.php');
 	$result = mysql_query("select project.pid,project.pname from project,userproject where userproject.uid='$uid' and userproject.status=1 and userproject.pid=project.pid"); //执行SQL查询指令
 	while($rows = mysql_fetch_row($result)){//使用while遍历所有记录，并显示在select
-		echo "<option value=\"case_$rows[1]\">$rows[1]</option>";
+		echo "<option value=\"$rows[0]\">$rows[1]</option>";
 	}
 ?>
 			</select>
