@@ -63,6 +63,7 @@
 					return $(this).form('validate');
 				},
 				success: function(result){
+					result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
 					var result = eval('('+result+')');
 					if (result.success){
 						$('#dlg').dialog('close');		// close the dialog
