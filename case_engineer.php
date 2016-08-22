@@ -6,12 +6,12 @@ if(!isset($_SESSION['userid'])){
 	header("Location:login.html");
 	exit();
 } else {
-	require('../header_login.php');
+	require('header_login.php');
 }
 ?>
 	<table width="100%"><tr><td align="center" valign="middle">
-	<table id="dg" title="我的用例" class="easyui-datagrid" style="width:80%;height:400px"
-			url="get_cases.php"
+	<table id="dg" title="我的用例" class="easyui-datagrid" style="width:80%"
+			url="./cases/get_cases.php"
 			toolbar="#toolbar" pagination="true"
 			rownumbers="true" fitColumns="true" singleSelect="true">
 		<thead>
@@ -80,5 +80,5 @@ if(!isset($_SESSION['userid'])){
 	</table>
 
 <?php
-  require('../footer.php');
+  require('footer.php');
 ?>
