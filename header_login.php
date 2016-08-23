@@ -47,6 +47,14 @@
 			$('#fm').form('clear');
 			url = './cases/save_user.php';
 		}
+		function newBug(){
+                        $('#dlg_newbug').dialog('open').dialog('setTitle','新建bug');
+                        $('#fm_newbug').form('clear');
+			$('#fm_newbug').form('load',{
+				bdescription:'前提条件：\n\n复现步骤：\n	1.\n	2.\n	3.\n测试结果：\n\n期待结果：\n\n复现率：\n\n备注：\n\n设备信息：\n	设备：\n	系统版本：\nBug优先级：\n'
+			});
+                        url = './bugs/save_bug.php';
+                }
 		function editCase(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
@@ -77,6 +85,27 @@
 				}
 			});
 		}
+		function saveBug(){
+                        $('#fm_newbug').form('submit',{
+                                url: url,
+                                onSubmit: function(){
+                                        return $(this).form('validate');
+                                },
+                                success: function(result){
+                                        result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
+                                        var result = eval('('+result+')');
+                                        if (result.success){
+                                                $('#dlg_newbug').dialog('close');              // close the dialog
+                                                $('#dg_bug').datagrid('reload');    // reload the user data
+                                        } else {
+                                                $.messager.show({
+                                                        title: 'Error',
+                                                        msg: result.msg
+                                                });
+                                        }
+                                }
+                        });
+                }
 		function removeUser(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
