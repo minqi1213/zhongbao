@@ -113,10 +113,19 @@
 				pageSize:50,
 				pageList: [50, 100, 150],
 				queryParams:{
-					pname:$('#projectselect').text()
+					pname:$('#projectselect').combobox('getText')
 				}
 			});
 			
+		}
+		function loadDataGridBugWithParam(){
+			$('#dg_bug').datagrid({
+				queryParams:{
+					projectid:$('#projectselect_bug').combobox('getValue'),
+					isuser:$('#projectselect_user').combobox('getValue'),
+					keyword:$('#projectselect_input').val()
+				}
+			});
 		}
 	</script>
 </head>
