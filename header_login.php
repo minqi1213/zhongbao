@@ -65,12 +65,16 @@
 				$('#projectselect_displaybug').combobox('setValue',row.pid);
 				if(row.binarydata==""){
 					document.getElementById('display_photo1').style.visibility="hidden";
+					$('#display_photo1').attr('src',"");
 				} else {
+					document.getElementById('display_photo1').style.visibility="visible";
 					$('#display_photo1').attr('src',row.binarydata);
 				}
                                 if(row.binarydata2==""){
                                         document.getElementById('display_photo2').style.visibility="hidden";
+					$('#display_photo2').attr('src',"");
                                 } else {
+					document.getElementById('display_photo2').style.visibility="visible";
                                         $('#display_photo2').attr('src',row.binarydata2);
                                 }
 			}
