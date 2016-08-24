@@ -25,9 +25,8 @@
 			$query_keyword = $query_keyword."(bug.btitle like '%$arr[$i]%' or bug.bdescription like '%$arr[$i]%') and ";
 		}
 	}
-	$query_user= ($isuser==1)? " and bug.uid="."$userid" : '';
+	$query_user= ($isuser==1)? " and bug.uid="."$uid" : '';
 	$query_project = ($projectid==0)? '' : " and bug.pid="."$projectid";
-
 
 	include 'conn.php';
 	//$rs = mysql_query("select count(*) from case_mmorpg");
