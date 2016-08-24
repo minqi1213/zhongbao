@@ -55,6 +55,26 @@
 			});
                         url = './bugs/save_bug.php';
                 }
+		function displayBug(index){
+			$('#dg_bug').datagrid('selectRow',index);
+			var row=$('#dg_bug').datagrid('getSelected');
+			if (row){
+				$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
+				$('#fm_displaybug').form('clear');
+				$('#fm_displaybug').form('load',row);
+				$('#projectselect_displaybug').combobox('setValue',row.pid);
+				if(row.binarydata==""){
+					document.getElementById('display_photo1').style.visibility="hidden";
+				} else {
+					$('#display_photo1').attr('src',row.binarydata);
+				}
+                                if(row.binarydata2==""){
+                                        document.getElementById('display_photo2').style.visibility="hidden";
+                                } else {
+                                        $('#display_photo2').attr('src',row.binarydata2);
+                                }
+			}
+		}
 		function editCase(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
@@ -126,8 +146,13 @@
 			}
 		}
 		function rowformatter(value,row,index){
-			return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+                        return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+                }
+		function rowformatter_buglist(value,row,index){
+			//return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"displayBug('"+index+"')\">"+value+"</a></div>";
 		}
+		
 		function formatResult(val,row){
 			if (val == '失败'){
 				return '<span style="color:red;">'+val+'</span>';
