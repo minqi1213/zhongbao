@@ -62,7 +62,12 @@
 				$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
 				$('#fm_displaybug').form('clear');
 				$('#fm_displaybug').form('load',row);
-				$('#projectselect_displaybug').combobox('setValue',row.pid);
+				$('#projectselect_displaybug').combobox({
+					setValue:row.pid,
+					disabled:true
+				});
+				$('#btitle_display').textbox('readonly',true);
+				$('#bdescription_display').textbox('readonly',true);
 				if(row.binarydata==""){
 					document.getElementById('display_photo1').style.visibility="hidden";
 					$('#display_photo1').attr('src',"");
@@ -78,6 +83,14 @@
                                         $('#display_photo2').attr('src',row.binarydata2);
                                 }
 			}
+		}
+		function editBug(){
+			$('#projectselect_displaybug').combobox({
+				required:true, 
+				disabled:false
+			});
+			$('#btitle_display').textbox('readonly',false);
+			$('#bdescription_display').textbox('readonly',false);
 		}
 		function showImg(src){
 			$('#dlg_displayimg').dialog('open').dialog('setTitle','截图');
