@@ -58,9 +58,9 @@ if(!isset($_SESSION['userid'])){
 			<a href="#" class="easyui-linkbutton" iconCls="icon-search" onclick="loadDataGridBugWithParam()">搜索</a>
 		</div>
 	</div>
-	<div style="position:relative">
+	<div style="position:relative;width:100%">
 	<!-- Dailog for create new bug-->
-	<div id="dlg_newbug" class="easyui-dialog" style="width:75%;height:500px;left:15%;top:10%;padding:10px 20px"
+	<div id="dlg_newbug" class="easyui-dialog"  style="width:75%;height:500px;left:15%;top:10%;padding:10px 20px"
 			closed="true" buttons="#dlg-buttons-new">
 		<div class="ftitle">新建bug</div>
 		<form id="fm_newbug" method="post" enctype="multipart/form-data" novalidate>
@@ -129,21 +129,27 @@ if(!isset($_SESSION['userid'])){
 				<textarea name="bdescription" class="easyui-textbox" readonly="readonly" data-options="multiline:true,required:true" style="width:90%;height:300px;resize:none;"></textarea>
 			</div>
 			<br><br>
-			<div>
-			<div style="margin-bottom:20px;width:45%;float:left">
+			<div style="width:100%">
+			<div style="margin-bottom:20px;width:50%;float:left">
 				<div>截图1:</div>
-				<img id="display_photo1" name="display_photo1" width="90%" src="">
+				<img id="display_photo1" name="display_photo1" width="90%" src="" onclick="javascript:showImg(src)">
 			</div>
-			<div style="margin-bottom:20px;width:45%;float:left">
+			<div style="margin-bottom:20px;width:50%;float:left">
 				<div>截图2:</div>
-				<img id="display_photo2" name="display_photo2" width="90%" src="">
+				<img id="display_photo2" name="display_photo2" width="90%" src="" onclick="javascript:showImg(src)">
 			</div>
 			</div>
 		</form>
 	</div>
 	<div id="dlg-buttons-display">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveChange()">保存</a>
-		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_displaybug').dialog('close')">取消</a>
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_displaybug').dialog('close');$('#dlg_displayimg').dialog('close');">取消</a>
+	</div>
+	<div id="dlg_displayimg" class="easyui-dialog" data-options="onMove:function(){$(this).panel('move',{left:0,top:0});}" style="width:100%;height:100%;left:15%;top:10%;padding:10px 20px"
+			closed="true">
+		<div style="margin-bottom:20px;width:100%;float:left">
+                	<img id="display_img" name="display_img" width="100%" src="">
+                </div>
 	</div>
 	</div>	
 	</td></tr>

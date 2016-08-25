@@ -79,6 +79,11 @@
                                 }
 			}
 		}
+		function showImg(src){
+			$('#dlg_displayimg').dialog('open').dialog('setTitle','截图');
+			$('#display_img').attr('src','');
+			$('#display_img').attr('src',src);
+		}
 		function editCase(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){
