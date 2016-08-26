@@ -57,17 +57,18 @@
                 }
 		function displayBug(index){
 			$('#dg_bug').datagrid('selectRow',index);
+			$('#btitle_display').textbox('readonly',true);
+                        $('#bdescription_display').textbox('readonly',true);
+			$('#imgarea_display').css('display','block');
+			$('#filearea_display').css('display','none');
+			$('#dlg-buttons-display').css('display','none');
 			var row=$('#dg_bug').datagrid('getSelected');
 			if (row){
 				$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
 				$('#fm_displaybug').form('clear');
 				$('#fm_displaybug').form('load',row);
-				$('#projectselect_displaybug').combobox({
-					setValue:row.pid,
-					disabled:true
-				});
-				$('#btitle_display').textbox('readonly',true);
-				$('#bdescription_display').textbox('readonly',true);
+				$('#projectselect_displaybug').combobox('setValue',row.pid);
+				$('#projectselect_displaybug').combobox('disable');
 				if(row.binarydata==""){
 					document.getElementById('display_photo1').style.visibility="hidden";
 					$('#display_photo1').attr('src',"");
@@ -85,12 +86,14 @@
 			}
 		}
 		function editBug(){
-			$('#projectselect_displaybug').combobox({
-				required:true, 
-				disabled:false
-			});
+			$('#projectselect_displaybug').combobox('enable');
 			$('#btitle_display').textbox('readonly',false);
 			$('#bdescription_display').textbox('readonly',false);
+			$('#imgarea_display').css('display','none');
+			$('#filearea_display').css('display','block');
+			$('#dlg-buttons-display').css('display','block');
+			$('#savebtn_editbug').linkbutton('enable');
+			url = './bugs/save_change.php';
 		}
 		function showImg(src){
 			$('#dlg_displayimg').dialog('open').dialog('setTitle','截图');
@@ -128,6 +131,7 @@
 			});
 		}
 		function saveBug(){
+			$('#savebtn_newbug').linkbutton("disable");
                         $('#fm_newbug').form('submit',{
                                 url: url,
                                 onSubmit: function(){
@@ -145,9 +149,33 @@
                                                         msg: result.msg
                                                 });
                                         }
+					$('#savebtn_newbug').linkbutton("enable");
                                 }
                         });
                 }
+		function saveChange(){
+			$('#savebtn_editbug').linkbutton("disable");
+                        $('#fm_displaybug').form('submit',{
+                                url: url,
+                                onSubmit: function(){
+                                        return $(this).form('validate');
+                                },
+                                success: function(result){
+                                        result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
+                                        var result = eval('('+result+')');
+                                        if (result.success){
+                                                $('#dlg_displaybug').dialog('close');              // close the dialog
+                                                $('#dg_bug').datagrid('reload');    // reload the user data
+                                        } else {
+                                                $.messager.show({
+                                                        title: 'Error',
+                                                        msg: result.msg
+                                                });
+                                        }
+                                        $('#savebtn_editbug').linkbutton("enable");
+                                }
+                        });
+		}
 		function removeUser(){
 			var row = $('#dg').datagrid('getSelected');
 			if (row){

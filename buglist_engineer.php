@@ -77,7 +77,6 @@ if(!isset($_SESSION['userid'])){
 	}
 ?>
 			</select>
-			</div>
 			<div class="fitem">
 				<label>bug标题:</label>
 				<input name="btitle" class="easyui-textbox" style="width:90%;resize:none;" data-options="required:true"/>
@@ -97,7 +96,7 @@ if(!isset($_SESSION['userid'])){
 		</form>
 	</div>
 	<div id="dlg-buttons-new">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveBug()">保存</a>
+		<a id="savebtn_newbug" href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveBug()">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_newbug').dialog('close')">取消</a>
 	</div>
 
@@ -129,6 +128,10 @@ if(!isset($_SESSION['userid'])){
 			</select>
 			</div>
 			<div class="fitem">
+                                <label>bug编号:</label>
+                                <input id="bid_display" name="bid" class="easyui-textbox" style="width:90%;resize:none;" readOnly=true data-options="required:true"/>
+                        </div>
+			<div class="fitem">
 				<label>bug标题:</label>
 				<input id="btitle_display" name="btitle" class="easyui-textbox" style="width:90%;resize:none;" data-options="required:true"/>
 			</div>
@@ -138,6 +141,14 @@ if(!isset($_SESSION['userid'])){
 			</div>
 			<br><br>
 			<div id="filearea_display">
+			<div style="margin-bottom:20px">
+				<div>截图1:</div>
+				<input class="easyui-filebox" name="photo1" data-options="prompt:'选择一张截图...'" style="width:90%">
+			</div>
+			<div style="margin-bottom:20px">
+				<div>截图2:</div>
+				<input class="easyui-filebox" name="photo2" data-options="prompt:'选择一张截图...'" style="width:90%">
+			</div>
 			</div>
 			<div id="imgarea_display">
 			<div style="width:100%">
@@ -154,7 +165,7 @@ if(!isset($_SESSION['userid'])){
 		</form>
 	</div>
 	<div id="dlg-buttons-display">
-		<a href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveChange()">保存</a>
+		<a id="savebtn_editbug" href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveChange()">保存</a>
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_displaybug').dialog('close');">取消</a>
 	</div>
 
