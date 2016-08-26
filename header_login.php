@@ -55,6 +55,57 @@
 			});
                         url = './bugs/save_bug.php';
                 }
+		function showBug(bid){
+			var rows = <?php 
+				include('./bugs/conn.php');
+        			$items=array();
+        			$rs=mysql_query("select bid,pid,uid,btitle,bdescription,uid,binarydata,binarydata2 from bug where bid=206");
+        			while($row=mysql_fetch_array($rs)){
+        				array_push($items , $row);
+        			}
+        			$result['rows']=$items;
+				if(count($items)==0){
+					echo "$.messager.show({
+							title: '错误！',
+							msg: '此bug不存在'
+						});return;";
+				} else {
+        			echo json_encode($result);}
+			?>;
+			$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
+			$('#fm_displaybug').form('clear');
+			$('#btitle_display').textbox('readonly',true);
+                        $('#bdescription_display').textbox('readonly',true);
+			$('#imgarea_display').css('display','block');
+			$('#filearea_display').css('display','none');
+			$('#dlg-buttons-display').css('display','none');
+			$('#fm_displaybug').form('load',rows.rows[0]);
+			$('#projectselect_displaybug').combobox('setValue',rows.rows[0].pid);
+			$('#projectselect_displaybug').combobox('disable');
+			var userid = <?php 
+					session_start();
+					echo $_SESSION['userid'];
+				?>;
+			if(userid != rows.rows[0].uid){
+				$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).hide();
+			} else {
+				$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).show();
+			}
+			if(rows.rows[0].binarydata==""){
+				document.getElementById('display_photo1').style.visibility="hidden";
+				$('#display_photo1').attr('src',"");
+			} else {
+				document.getElementById('display_photo1').style.visibility="visible";
+				$('#display_photo1').attr('src',rows.rows[0].binarydata);
+			}
+                        if(rows.rows[0].binarydata2==""){
+                        	document.getElementById('display_photo2').style.visibility="hidden";
+				$('#display_photo2').attr('src',"");
+                        } else {
+				document.getElementById('display_photo2').style.visibility="visible";
+                        	$('#display_photo2').attr('src',rows.rows[0].binarydata2);
+                        }
+		}
 		function displayBug(index){
 			$('#dg_bug').datagrid('selectRow',index);
 			$('#btitle_display').textbox('readonly',true);
@@ -207,7 +258,8 @@
 			}
 		}
 		function rowformatter(value,row,index){
-                        return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+                        //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
+			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"showBug('"+value+"')\">"+value+"</a></div>";
                 }
 		function rowformatter_buglist(value,row,index){
 			//return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
