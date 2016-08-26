@@ -25,6 +25,7 @@ if(!isset($_SESSION['userid'])){
 				<th data-options="field:'bid',formatter:rowformatter_buglist" width="5%">详情</th>
 				<th field="btime" width="18%">提交时间</th>
 				<th data-options="field:'pname'" width="10%" >项目名称</th>
+				<th field="uid" hidden="true" width="0%">提交人编号</th>
 				<th data-options="field:'username'" width="10%" >提交人</th>
 			</tr>
 		</thead>
@@ -105,6 +106,7 @@ if(!isset($_SESSION['userid'])){
 			closed="true" buttons="#dlg-buttons-display"data-options="
 		toolbar: [{
 					text:'编辑',
+					id:'edit_bug_toolbar',
 					iconCls:'icon-edit',
 					handler:function(){
 						editBug()

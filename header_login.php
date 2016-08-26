@@ -69,6 +69,15 @@
 				$('#fm_displaybug').form('load',row);
 				$('#projectselect_displaybug').combobox('setValue',row.pid);
 				$('#projectselect_displaybug').combobox('disable');
+				var userid = <?php 
+					session_start();
+					echo $_SESSION['userid'];
+				?>;
+				if(userid != row.uid){
+					$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).hide();
+				} else {
+					$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).show();
+				}
 				if(row.binarydata==""){
 					document.getElementById('display_photo1').style.visibility="hidden";
 					$('#display_photo1').attr('src',"");
@@ -86,6 +95,8 @@
 			}
 		}
 		function editBug(){
+			
+			
 			$('#projectselect_displaybug').combobox('enable');
 			$('#btitle_display').textbox('readonly',false);
 			$('#bdescription_display').textbox('readonly',false);
