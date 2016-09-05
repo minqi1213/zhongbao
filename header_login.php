@@ -104,7 +104,8 @@
                         } else {
 				document.getElementById('display_photo2').style.visibility="visible";
                         	$('#display_photo2').attr('src',rows.rows[0].binarydata2);
-                        }
+                    	} 
+			   
 		}
 		function displayBug(index){
 			$('#dg_bug').datagrid('selectRow',index);
@@ -226,8 +227,9 @@
                                         result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
                                         var result = eval('('+result+')');
                                         if (result.success){
-                                                $('#dlg_displaybug').dialog('close');              // close the dialog
+						$('#dlg_displaybug').dialog('close');              // close the dialog
                                                 $('#dg_bug').datagrid('reload');    // reload the user data
+						$('#dg').datagrid('reload');
                                         } else {
                                                 $.messager.show({
                                                         title: 'Error',
