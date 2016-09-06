@@ -287,6 +287,15 @@
 				}
 			});
 		}
+		function displayMission(index){
+			$('#dg_mission').datagrid('selectRow',index);
+			var row=$('#dg_mission').datagrid('getSelected');
+			if(row){
+				$('#dlg_mission').dialog('open').dialog('setTitle','任务详情');
+				$('#fm_mission').form('clear');
+				$('#fm_mission').form('load',row);
+			}
+		}
 		function rowformatter(value,row,index){
                         //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
 			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"showBug('"+value+"')\">"+value+"</a></div>";
@@ -320,6 +329,9 @@
                         } else {
 				return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"acceptMission('"+rowData.pid+"')\">接取</a></div>";
                         }
+		}
+		function rowformatter_pinfo(value,row,index){
+			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"displayMission('"+index+"')\">任务详情</a></div>";
 		}
 		function loadDataGridWithParam(){
 			$('#dg').datagrid({

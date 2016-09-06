@@ -20,10 +20,30 @@ if(!isset($_SESSION['userid'])){
 				<th field="ptime" width="40%">发布时间</th>
 				<th data-options="field:'status',formatter:rowformatter_pstatus" width="20%">接取状态</th>
 				<th data-options="field:'pstatus',formatter:rowformatter_paccept" width="10%">是否接取</th>
-				<th data-options="field:'pid',formatter:rowformatter" width="10%" >任务详情</th>
+				<th data-options="field:'pid',formatter:rowformatter_pinfo" width="10%" >任务详情</th>
+				<th field="pdescription" hidden="true" width="0%">任务描述</th>
 			</tr>
 		</thead>
 	</table>
+
+	<div id="dlg_mission" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons-mission">
+		<div class="ftitle">任务信息</div>
+		<form id="fm_mission" method="post" novalidate>
+			<div class="fitem">
+				<label>任务名称:</label>
+				<textarea name="pname" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
+			</div>
+			<div class="fitem">
+				<label>任务描述:</label>
+				<textarea name="pdescription" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
+			</div>
+			</div>
+		</form>
+	</div>
+	<div id="dlg-buttons-mission">
+		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission').dialog('close')">关闭</a>
+	</div>
 	
 	</td></tr>
 	</table>
@@ -33,6 +53,8 @@ if(!isset($_SESSION['userid'])){
 			<input type='hidden' name='pid'>
 		</form>
 	</div>
+
+	
 
 <?php
   require('footer.php');
