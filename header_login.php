@@ -259,6 +259,34 @@
 				});
 			}
 		}
+		function acceptMission(pid){
+			$('#fm_accept').form('clear');
+			$('#fm_accept').form('load',{
+				pid:pid});
+			url='./missions/accept_mission.php';
+			$('#fm_accept').form('submit',{
+				url: url,
+				onSubmit: function(){
+					return $(this).form('enableValidation').form('validate');
+				},
+				success: function(result){
+					result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
+					var result = eval('('+result+')');
+					if (result.success){
+						$.messager.show({
+                                                        title: '提示',
+                                                        msg: '任务领取成功，请等待审核'
+                                                });
+						$('#dg_mission').datagrid('reload');	// reload the user data
+					} else {
+						$.messager.show({
+							title: 'Error',
+							msg: result.msg
+						});
+					}
+				}
+			});
+		}
 		function rowformatter(value,row,index){
                         //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
 			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"showBug('"+value+"')\">"+value+"</a></div>";
@@ -276,6 +304,22 @@
 			} else {
 				return val;
 			}
+		}
+		function rowformatter_pstatus(val,row){
+			if (val == '1'){
+				return '审核中';
+			} else if (val == '2'){
+				return '已接取';
+			} else {
+				return '未接取';
+			}
+		}
+		function rowformatter_paccept(value,rowData,rowIndex){
+			if (rowData.status == '1'||rowData.status == '2' ){
+                                return '已操作完成';
+                        } else {
+				return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"acceptMission('"+rowData.pid+"')\">接取</a></div>";
+                        }
 		}
 		function loadDataGridWithParam(){
 			$('#dg').datagrid({
