@@ -369,7 +369,7 @@
       <span class="menu_header"><a class="menu_a" href="case_engineer.php">测试用例</a></span></td>
     <td class="label_header" width="20%" >
       <img src="s-logo.gif" alt="" height="20" width="20" />
-      <span class="menu_header" ><a class="menu_a" href="my.php">任务接取中心</a></span></td>
+      <span class="menu_header" ><a class="menu_a" href="mission_engineer.php">任务接取中心</a></span></td>
     <td class="label_header" width="20%">
       <img src="s-logo.gif" alt="" height="20" width="20" />
       <span class="menu_header"><a class="menu_a" href="login.php?action=logout">注销</a></span></td>
