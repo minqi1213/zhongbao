@@ -56,22 +56,44 @@
                         url = './bugs/save_bug.php';
                 }
 		function showBug(bid){
-			var rows = <?php 
-				include('./bugs/conn.php');
-        			$items=array();
-        			$rs=mysql_query("select bid,pid,uid,btitle,bdescription,uid,binarydata,binarydata2 from bug where bid=206");
-        			while($row=mysql_fetch_array($rs)){
-        				array_push($items , $row);
-        			}
-        			$result['rows']=$items;
-				if(count($items)==0){
-					echo "$.messager.show({
-							title: '错误！',
-							msg: '此bug不存在'
-						});return;";
-				} else {
-        			echo json_encode($result);}
-			?>;
+			url = "./cases/get_bugdetail.php";
+			var postStr = "bid="+ bid;
+			//alert(postStr);
+			var ajax = false;
+			//开始初始化XMLHttpRequest对象
+			if(window.XMLHttpRequest) { //Mozilla 浏览器
+				ajax = new XMLHttpRequest();
+				if (ajax.overrideMimeType) {//设置MiME类别
+					ajax.overrideMimeType("text/xml");
+				}
+			}
+			else if (window.ActiveXObject) { // IE浏览器
+				try {
+					ajax = new ActiveXObject("Msxml2.XMLHTTP");
+				} catch (e) {
+					try {
+						ajax = new ActiveXObject("Microsoft.XMLHTTP");
+					} catch (e) {}
+				}
+			}
+			if (!ajax) { // 异常，创建对象实例失败
+				window.alert("不能创建XMLHttpRequest对象实例.");
+				return false;
+			}
+			 //通过Post方式打开连接
+			ajax.open("POST", url, true);
+			//定义传输的文件HTTP头信息
+			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
+			//发送POST数据
+			ajax.send(postStr);
+			 //获取执行状态
+			ajax.onreadystatechange = function() {
+				//如果执行状态成功，那么就把返回信息写到指定的层里
+				//alert(ajax.status);
+				if (ajax.readyState == 4 && ajax.status == 200) {
+					 //alert(ajax.responseText);
+			var rows = ajax.responseText;
+			rows=JSON.parse(rows);
 			$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
 			$('#fm_displaybug').form('clear');
 			$('#btitle_display').textbox('readonly',true);
@@ -105,6 +127,8 @@
 				document.getElementById('display_photo2').style.visibility="visible";
                         	$('#display_photo2').attr('src',rows.rows[0].binarydata2);
                     	} 
+				}
+			}
 			   
 		}
 		function displayBug(index){
