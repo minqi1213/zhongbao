@@ -187,8 +187,8 @@
 			}
 		}
 		function displayMission(index){
-			$('#dg_mission').datagrid('selectRow',index);
-			var row=$('#dg_mission').datagrid('getSelected');
+			$('#dg_mission_cp').datagrid('selectRow',index);
+			var row=$('#dg_mission_cp').datagrid('getSelected');
 			if(row){
 				$('#dlg_mission').dialog('open').dialog('setTitle','任务详情');
 				$('#fm_mission').form('clear');
@@ -215,11 +215,20 @@
 		}
 		function rowformatter_pstatus(val,row){
 			if (val == '1'){
-				return '审核中';
+				return '测试中';
 			} else if (val == '2'){
-				return '已接取';
+				return '已完成';
 			} else {
-				return '未接取';
+				return '待测试';
+			}
+		}
+		function rowformatter_securitystatus(val,row){
+			if (val == '1'){
+				return '不安全';
+			} else if (val == '2'){
+				return '安全';
+			} else {
+				return '待安全测试';
 			}
 		}
 		function rowformatter_paccept(value,rowData,rowIndex){
@@ -230,7 +239,7 @@
                         }
 		}
 		function rowformatter_pinfo(value,row,index){
-			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"displayMission('"+index+"')\">任务详情</a></div>";
+			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"displayMission('"+index+"')\">详情</a></div>";
 		}
 		function loadDataGridWithParam(){
 			$('#dg').datagrid({
@@ -276,7 +285,7 @@
       		<span class="menu_header"><a class="menu_a" href="buglist_cp.php">查询bug</a></span></td>
     	<td class="label_header" width="25%" >
       		<img src="s-logo.gif" alt="" height="20" width="20" />
-      		<span class="menu_header" ><a class="menu_a" href="my.php">任务中心</a></span></td>
+      		<span class="menu_header" ><a class="menu_a" href="mission_cp.php">任务中心</a></span></td>
     	<td class="label_header" width="25%">
       		<img src="s-logo.gif" alt="" height="20" width="20" />
       		<span class="menu_header"><a class="menu_a" href="login.php?action=logout">注销</a></span></td>
