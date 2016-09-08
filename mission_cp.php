@@ -28,7 +28,14 @@ if(!isset($_SESSION['userid'])){
 		</thead>
 	</table>
 
-	<div id="dlg_mission" class="easyui-dialog" style="width:600px;height:400px;padding:10px 20px"
+	<div id="toolbar" style="padding:5px;height:auto">
+		<div>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-add" plain="true" onclick="newMission()">新建任务</a>
+			<a href="#" class="easyui-linkbutton" iconCls="icon-edit" plain="true" onclick="editMission()">编辑任务</a>
+		</div>
+	</div>
+	<div style="position:relative;width:100%">
+	<div id="dlg_mission" class="easyui-dialog" style="width:600px;height:400px;left:25%;top:10%;padding:10px 20px"
 			closed="true" buttons="#dlg-buttons-mission">
 		<div class="ftitle">任务信息</div>
 		<form id="fm_mission" method="post" novalidate>
@@ -38,16 +45,38 @@ if(!isset($_SESSION['userid'])){
 			</div>
 			<div class="fitem">
 				<label>任务描述:</label>
-				<textarea name="pdescription" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
-			</div>
+				<textarea name="pdescription" class="easyui-validatebox" disabled="disabled" style="width:100%;height:200px;resize:none;"></textarea>
 			</div>
 		</form>
 	</div>
 	<div id="dlg-buttons-mission">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission').dialog('close')">关闭</a>
 	</div>
-	
-	</td></tr>
+
+	<div id="dlg_mission_new" class="easyui-dialog" style="width:600px;height:500px;left:25%;top:10%;padding:10px 20px"
+			closed="true" buttons="#dlg-buttons-mission-new">
+		<div class="ftitle">新增任务</div>
+		<form id="fm_mission_new" method="post"  enctype="multipart/form-data" novalidate>
+                        <div class="fitem">
+                                <label>任务名称:</label>
+                                <textarea name="pname" class="easyui-validatebox" style="width:100%;resize:none;" data-options="required:true"></textarea>
+                        </div>
+                        <div class="fitem">
+                                <label>任务描述:</label>
+                                <textarea name="pdescription" class="easyui-validatebox" style="width:100%;height:200px;resize:none;" data-options="required:true"></textarea>
+                        </div>
+			<div style="margin-bottom:20px">
+				<div>应用程序:</div>
+				<input class="easyui-filebox" name="application" data-options="prompt:'选择要上传的apk...'" style="width:90%">
+			</div>
+                </form>
+	</div>
+	<div id="dlg-buttons-mission-new">
+		<a id="savebtn_newmission" href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMission()">保存</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission_new').dialog('close')">关闭</a>
+        </div>
+	</div>	
+	</td></tr> 
 	</table>
 
 <?php

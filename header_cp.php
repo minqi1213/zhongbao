@@ -42,87 +42,6 @@
 	<script type="text/javascript" src="./js/jquery.easyui.min.js"></script>
 	<script type="text/javascript">
 		var url;
-		function newUser(){
-			$('#dlg').dialog('open').dialog('setTitle','New User');
-			$('#fm').form('clear');
-			url = './cases/save_user.php';
-		}
-		function showBug(bid){
-			url = "./cases/get_bugdetail.php";
-			var postStr = "bid="+ bid;
-			//alert(postStr);
-			var ajax = false;
-			//开始初始化XMLHttpRequest对象
-			if(window.XMLHttpRequest) { //Mozilla 浏览器
-				ajax = new XMLHttpRequest();
-				if (ajax.overrideMimeType) {//设置MiME类别
-					ajax.overrideMimeType("text/xml");
-				}
-			}
-			else if (window.ActiveXObject) { // IE浏览器
-				try {
-					ajax = new ActiveXObject("Msxml2.XMLHTTP");
-				} catch (e) {
-					try {
-						ajax = new ActiveXObject("Microsoft.XMLHTTP");
-					} catch (e) {}
-				}
-			}
-			if (!ajax) { // 异常，创建对象实例失败
-				window.alert("不能创建XMLHttpRequest对象实例.");
-				return false;
-			}
-			 //通过Post方式打开连接
-			ajax.open("POST", url, true);
-			//定义传输的文件HTTP头信息
-			ajax.setRequestHeader("Content-Type","application/x-www-form-urlencoded");
-			//发送POST数据
-			ajax.send(postStr);
-			 //获取执行状态
-			ajax.onreadystatechange = function() {
-				//如果执行状态成功，那么就把返回信息写到指定的层里
-				//alert(ajax.status);
-				if (ajax.readyState == 4 && ajax.status == 200) {
-					 //alert(ajax.responseText);
-			var rows = ajax.responseText;
-			rows=JSON.parse(rows);
-			$('#dlg_displaybug').dialog('open').dialog('setTitle','bug详情');
-			$('#fm_displaybug').form('clear');
-			$('#btitle_display').textbox('readonly',true);
-                        $('#bdescription_display').textbox('readonly',true);
-			$('#imgarea_display').css('display','block');
-			$('#filearea_display').css('display','none');
-			$('#dlg-buttons-display').css('display','none');
-			$('#fm_displaybug').form('load',rows.rows[0]);
-			$('#projectselect_displaybug').combobox('setValue',rows.rows[0].pid);
-			$('#projectselect_displaybug').combobox('disable');
-			var userid = <?php 
-					session_start();
-					echo $_SESSION['userid'];
-				?>;
-			if(userid != rows.rows[0].uid){
-				$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).hide();
-			} else {
-				$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).show();
-			}
-			if(rows.rows[0].binarydata==""){
-				document.getElementById('display_photo1').style.visibility="hidden";
-				$('#display_photo1').attr('src',"");
-			} else {
-				document.getElementById('display_photo1').style.visibility="visible";
-				$('#display_photo1').attr('src',rows.rows[0].binarydata);
-			}
-                        if(rows.rows[0].binarydata2==""){
-                        	document.getElementById('display_photo2').style.visibility="hidden";
-				$('#display_photo2').attr('src',"");
-                        } else {
-				document.getElementById('display_photo2').style.visibility="visible";
-                        	$('#display_photo2').attr('src',rows.rows[0].binarydata2);
-                    	} 
-				}
-			}
-			   
-		}
 		function displayBug(index){
 			$('#dg_bug_cp').datagrid('selectRow',index);
 			$('#btitle_display').textbox('readonly',true);
@@ -191,9 +110,38 @@
 			var row=$('#dg_mission_cp').datagrid('getSelected');
 			if(row){
 				$('#dlg_mission').dialog('open').dialog('setTitle','任务详情');
+				//$("#dlg_mission").panel("move",{top:$(document).scrollTop() + ($(window).height()-400) * 0.5}); 
 				$('#fm_mission').form('clear');
 				$('#fm_mission').form('load',row);
 			}
+		}
+		function newMission(){
+			$('#dlg_mission_new').dialog('open').dialog('setTitle','新建任务');
+			$('#fm_mission_new').form('clear');
+			url='./missions/save_mission.php';
+		}
+		function saveMission(){
+			$('#savebtn_newmission').linkbutton("disable");
+			$('#fm_mission_new').form('submit',{
+                                url: url,
+                                onSubmit: function(){
+                                        return $(this).form('validate');
+                                },
+                                success: function(result){
+                                        result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
+                                        var result = eval('('+result+')');
+                                        if (result.success){
+                                                $('#dlg_mission_new').dialog('close');              // close the dialog
+                                                $('#dg_mission_cp').datagrid('reload');    // reload the user data
+                                        } else {
+                                                $.messager.show({
+                                                        title: 'Error',
+                                                        msg: result.msg
+                                                });
+                                        }
+					$('#savebtn_newmission').linkbutton("enable");
+                                }
+                        });
 		}
 		function rowformatter(value,row,index){
                         //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
