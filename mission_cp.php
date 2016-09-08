@@ -75,6 +75,30 @@ if(!isset($_SESSION['userid'])){
 		<a id="savebtn_newmission" href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMission()">保存</a>
                 <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission_new').dialog('close')">关闭</a>
         </div>
+
+	<div id="dlg_mission_edit" class="easyui-dialog" style="width:600px;height:500px;left:25%;top:10%;padding:10px 20px"
+                        closed="true" buttons="#dlg-buttons-mission-edit">
+                <div class="ftitle">更新任务</div>
+                <form id="fm_mission_edit" method="post"  enctype="multipart/form-data" novalidate>
+                        <div class="fitem">
+                                <label>任务名称:</label>
+                                <textarea name="pname" class="easyui-validatebox" style="width:100%;resize:none;" data-options="required:true"></textarea>
+                        </div>
+                        <div class="fitem">
+                                <label>任务描述:</label>
+                                <textarea name="pdescription" class="easyui-validatebox" style="width:100%;height:200px;resize:none;" data-options="required:true"></textarea>
+                        </div>
+                        <div style="margin-bottom:20px">
+                                <div>应用程序:</div>
+                                <input class="easyui-filebox" name="application" data-options="prompt:'请上传要更新的apk...'" style="width:90%">
+                        </div>
+                </form>
+        </div>
+        <div id="dlg-buttons-mission-edit">
+                <a id="savebtn_editmission" href="#" class="easyui-linkbutton" iconCls="icon-ok" onclick="saveMissionChange()">保存</a>
+                <a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission_edit').dialog('close')">关闭</a>
+        </div>
+
 	</div>	
 	</td></tr> 
 	</table>

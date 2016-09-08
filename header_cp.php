@@ -143,6 +143,14 @@
                                 }
                         });
 		}
+		function editMission(){
+			var row = $('#dg_mission_cp').datagrid('getSelected');
+			if (row){
+				$('#dlg_mission_edit').dialog('open').dialog('setTitle','修改任务');
+				$('#fm_mission_edit').form('load',row);
+				url = './mission/save_mission_change';
+			}
+		}
 		function rowformatter(value,row,index){
                         //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";
 			return "<div><a href=\"#\" class=\"easyui-linkbutton\" plain=\"true\" onclick=\"showBug('"+value+"')\">"+value+"</a></div>";
