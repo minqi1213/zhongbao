@@ -13,7 +13,7 @@ if(!isset($_SESSION['userid'])){
 	<table width="100%"><tr><td align="center" valign="middle">
 	<table id="dg_bug" title="我的bug" class="easyui-datagrid" style="width:80%"
 			url="./bugs/get_bugs.php"
-			toolbar="#toolbar" pagination="true"
+			toolbar="#toolbar" pagination="true" pageSize="50" PageList="[50,100,150,200]"
 			rownumbers="true" fitColumns="true" singleSelect="true">
 		<thead>
 			<tr>
