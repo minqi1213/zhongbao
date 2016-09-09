@@ -22,6 +22,7 @@ if(!isset($_SESSION['userid'])){
 				<th data-options="field:'pstatus',formatter:rowformatter_paccept" width="10%">是否接取</th>
 				<th data-options="field:'pid',formatter:rowformatter_pinfo" width="10%" >任务详情</th>
 				<th field="pdescription" hidden="true" width="0%">任务描述</th>
+				<th field="binarydata" hidden="true" width="0%">程序链接</th>
 			</tr>
 		</thead>
 	</table>
@@ -38,8 +39,12 @@ if(!isset($_SESSION['userid'])){
 				<label>任务描述:</label>
 				<textarea name="pdescription" class="easyui-validatebox" disabled="disabled" style="width:100%;resize:none;"></textarea>
 			</div>
-			</div>
+			<div id="pdownload" class="fitem" style="display:none">
+                                <label>下载程序:</label>
+				<a id="download_link" name="binarydata">下载</a>
+                        </div>
 		</form>
+		</div>
 	</div>
 	<div id="dlg-buttons-mission">
 		<a href="#" class="easyui-linkbutton" iconCls="icon-cancel" onclick="javascript:$('#dlg_mission').dialog('close')">关闭</a>

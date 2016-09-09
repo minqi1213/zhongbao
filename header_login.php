@@ -318,6 +318,13 @@
 				$('#dlg_mission').dialog('open').dialog('setTitle','任务详情');
 				$('#fm_mission').form('clear');
 				$('#fm_mission').form('load',row);
+				if((row.status==1) && (row.binarydata!=="") ){
+					document.getElementById('pdownload').style.display="block";
+					$('#download_link').attr("href",row.binarydata); 
+				}else{
+					document.getElementById('pdownload').style.display="none";
+                                        $('#download_link').attr("href",'');
+				}
 			}
 		}
 		function rowformatter(value,row,index){
