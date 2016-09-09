@@ -148,8 +148,31 @@
 			if (row){
 				$('#dlg_mission_edit').dialog('open').dialog('setTitle','修改任务');
 				$('#fm_mission_edit').form('load',row);
-				url = './mission/save_mission_change';
+				url = './missions/save_mission_change.php';
 			}
+		}
+		function saveMissionChange(){
+			$('#savebtn_editmission').linkbutton("disable");
+			$('#fm_mission_edit').form('submit',{
+                                url: url,
+                                onSubmit: function(){
+                                        return $(this).form('validate');
+                                },
+                                success: function(result){
+                                        result = result.substring(result.indexOf('{'),result.indexOf('}')+1);
+                                        var result = eval('('+result+')');
+                                        if (result.success){
+                                                $('#dlg_mission_edit').dialog('close');              // close the dialog
+                                                $('#dg_mission_cp').datagrid('reload');    // reload the user data
+                                        } else {
+                                                $.messager.show({
+                                                        title: 'Error',
+                                                        msg: result.msg
+                                                });
+                                        }
+                                        $('#savebtn_editmission').linkbutton("enable");
+                                }
+                        });
 		}
 		function rowformatter(value,row,index){
                         //return "<a href='detail.php?id="+value+"' target='_blank' >"+value+"</a>";

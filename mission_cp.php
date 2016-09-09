@@ -80,6 +80,10 @@ if(!isset($_SESSION['userid'])){
                         closed="true" buttons="#dlg-buttons-mission-edit">
                 <div class="ftitle">更新任务</div>
                 <form id="fm_mission_edit" method="post"  enctype="multipart/form-data" novalidate>
+			<div class="fitem" style="display:none">
+                                <label>任务编号:</label>
+                                <input id="pid_display" name="pid" class="easyui-textbox" style="width:90%;resize:none;" readOnly=true data-options="required:true"/>
+                        </div>
                         <div class="fitem">
                                 <label>任务名称:</label>
                                 <textarea name="pname" class="easyui-validatebox" style="width:100%;resize:none;" data-options="required:true"></textarea>
