@@ -155,17 +155,17 @@
 					$("div.dialog-toolbar [id='edit_bug_toolbar']").eq(0).show();
 				}
 				if(row.binarydata==""){
-					document.getElementById('display_photo1').style.visibility="hidden";
+					document.getElementById('display_photo1_div').style.display="none";
 					$('#display_photo1').attr('src',"");
 				} else {
-					document.getElementById('display_photo1').style.visibility="visible";
+					document.getElementById('display_photo1_div').style.display="block";
 					$('#display_photo1').attr('src',row.binarydata);
 				}
                                 if(row.binarydata2==""){
-                                        document.getElementById('display_photo2').style.visibility="hidden";
+                                        document.getElementById('display_photo2_div').style.display="none";
 					$('#display_photo2').attr('src',"");
                                 } else {
-					document.getElementById('display_photo2').style.visibility="visible";
+					document.getElementById('display_photo2_div').style.display="block";
                                         $('#display_photo2').attr('src',row.binarydata2);
                                 }
 			}
@@ -472,11 +472,11 @@
 			</div>
 			<div id="imgarea_display">
 			<div style="width:100%">
-			<div style="margin-bottom:20px;width:50%;float:left">
+			<div id="display_photo1_div" style="margin-bottom:20px;width:50%;float:left">
 				<div>截图1:</div>
 				<img id="display_photo1" name="display_photo1" width="90%" src="" onclick="javascript:showImg(src)">
 			</div>
-			<div style="margin-bottom:20px;width:50%;float:left">
+			<div id="display_photo2_div" style="margin-bottom:20px;width:50%;float:left">
 				<div>截图2:</div>
 				<img id="display_photo2" name="display_photo2" width="90%" src="" onclick="javascript:showImg(src)">
 			</div>
